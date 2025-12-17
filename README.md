@@ -22,6 +22,38 @@ Build Data Pipeline from public datasets into MongoDB using dlt(data load tool).
 2. Write python3 code for dlt operation load data from public datasets into mongodb
    ```bash
    (mongo_dlt) ❯ lvim rest_api_mongo.py
+
+   # -------------------------------------------------
+   # 1. Transformer: read the correct sheet and yield rows
+   # -------------------------------------------------
+   ...
+   df = pd.read_excel(f, sheet_name="Online Retail")
+   for record in df.to_dict(orient="records"):
+      yield record
+   ...
+   # -------------------------------------------------
+   # 2. Download + extract the UCI Online Retail dataset
+   # -------------------------------------------------
+   URL = "https://archive.ics.uci.edu/static/public/352/online+retail.zip"
+   ZIP_PATH = "online_retail.zip"
+   XLSX_FILE = "online_retail.xlsx"
+   ...
+   # -------------------------------------------------
+   # 3. Load into DuckDB (correct table name!)
+   # -------------------------------------------------
+   pipeline = dlt.pipeline(
+    pipeline_name="online_retail_to_mongo",
+    destination="duckdb",
+    dataset_name="retail_data",
+   )
+   ...
+   # -------------------------------------------------
+   # 4. Copy from DuckDB → MongoDB
+   # -------------------------------------------------
+   coll.delete_many({})  # clean old data
+   result = coll.insert_many(records)
+   print(f"Inserted {len(result.inserted_ids):,} documents into MongoDB")
+   ...
    ```
 3. Run the dlt within python code
    ```bash
