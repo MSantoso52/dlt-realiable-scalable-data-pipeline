@@ -3,7 +3,7 @@ Data pipeline (reliability, scale, schema management, incremental loads, multipl
 
 # *Project Overview*
 Build Data Pipeline from public datasets into MongoDB using dlt(data load tool). It Python library that makes it easy to build reliable, maintainable, and production-ready data pipelines in just a few lines of code.
-![]()
+![Projectflow](dlt_projectflow.png)
 
 # *Problem To Be Solved*
 Manual ETL pipelines are fragile: prone to schema mismatches, full reloads, failures on scale, and vendor lock-in. dlt abstracts this for robust ingestion from sources like Excel/APIs.
