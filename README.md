@@ -34,6 +34,7 @@ Build Data Pipeline from public datasets into MongoDB using dlt(data load tool).
    # -------------------------------------------------
    # 2. Download + extract the UCI Online Retail dataset
    # -------------------------------------------------
+   ...
    URL = "https://archive.ics.uci.edu/static/public/352/online+retail.zip"
    ZIP_PATH = "online_retail.zip"
    XLSX_FILE = "online_retail.xlsx"
@@ -50,6 +51,7 @@ Build Data Pipeline from public datasets into MongoDB using dlt(data load tool).
    # -------------------------------------------------
    # 4. Copy from DuckDB → MongoDB
    # -------------------------------------------------
+   ...
    coll.delete_many({})  # clean old data
    result = coll.insert_many(records)
    print(f"Inserted {len(result.inserted_ids):,} documents into MongoDB")
